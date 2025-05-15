@@ -99,6 +99,7 @@ import { CommentStatusIconComponent } from './components/annotation-tools/commen
 import { LoginComponent } from './components/user/login/login.component';
 import { RoomPanelComponent } from './components/collab/room-panel.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { NumericRangeDirective } from "./components/side-nav-menu/pages/numeric-range.directive";
 
 const storeSchema = [
   { name: 'name', keypath: 'name', options: { unique: false } },
@@ -110,11 +111,11 @@ const dbConfig: DBConfig  = {
   objectStoresMeta: [
     { store: 'CustomStamp',
       storeConfig: { keyPath: 'id', autoIncrement: true },
-      storeSchema 
+      storeSchema
     },
     { store: 'UploadStamp',
       storeConfig: { keyPath: 'id', autoIncrement: true },
-      storeSchema 
+      storeSchema
     }
   ]
 };
@@ -157,6 +158,7 @@ const dbConfig: DBConfig  = {
     PagesComponent,
     ThreedPartInfoComponent,
     PageThumbnailDirective,
+    NumericRangeDirective,
     ThumbnailDirective,
     CountPanelComponent,
     CountTypeSelectComponent,
@@ -217,6 +219,6 @@ const dbConfig: DBConfig  = {
   ],
   providers: [ColorHelper, Title],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }
