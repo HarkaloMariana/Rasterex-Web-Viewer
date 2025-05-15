@@ -30,9 +30,6 @@ export class TopNavMenuComponent implements OnInit {
   @ViewChild('more') more: ElementRef;
   @Input() state: any;
 
-  guiConfig$ = this.rxCoreService.guiConfig$;
-  guiState$ = this.rxCoreService.guiState$;
-  guiMode$ = this.rxCoreService.guiMode$;
   GuiMode = GuiMode;
   guiConfig: IGuiConfig = {};
   guiState: any;
@@ -57,7 +54,7 @@ export class TopNavMenuComponent implements OnInit {
   fileLength: number = 0;
   collabPanelOpened: boolean = false;
   private sidebarPanelActive: boolean = false;
-  
+
   constructor(
     private readonly fileGaleryService: FileGaleryService,
     private readonly rxCoreService: RxCoreService,
@@ -70,7 +67,7 @@ export class TopNavMenuComponent implements OnInit {
     ) {
   }
 
-  
+
 
   private _setOptions(option: any = undefined): void {
     this.options = [
@@ -136,7 +133,7 @@ export class TopNavMenuComponent implements OnInit {
       if (value !== undefined){
         this.isActionSelected = value;
       }
-     
+
     });
 
     this.annotationToolsService.notePanelState$.subscribe(state => {
@@ -148,7 +145,7 @@ export class TopNavMenuComponent implements OnInit {
       if(state.visible && state.value) {
         this.currentScaleValue = state.value;
       }
-      
+
       if(state.visible === false) {
         this.currentScaleValue = '';
       }
@@ -325,14 +322,14 @@ export class TopNavMenuComponent implements OnInit {
 
             if(RXCore.getDocScales() != undefined && RXCore.getDocScales().length === 0 ){
               //this.scalesOptions = RXCore.getDocScales();
-              this.annotationToolsService.setMeasurePanelState({ visible: true }); 
+              this.annotationToolsService.setMeasurePanelState({ visible: true });
             }
-        
 
-            /*if(docObj && docObj.scalesOptions && docObj.scalesOptions.length === 0) 
+
+            /*if(docObj && docObj.scalesOptions && docObj.scalesOptions.length === 0)
               this.annotationToolsService.setMeasurePanelState({ visible: true }); */
-            
-  
+
+
           } else if(option.value === 'annotate'){
             this.rxCoreService.setGuiConfig({
               disableMarkupTextButton: false,
@@ -349,7 +346,7 @@ export class TopNavMenuComponent implements OnInit {
               disableMarkupArrowButton: false,
               disableMarkupCountButton: true,
               disableMarkupMeasureButton: true,
-              disableImages: false, 
+              disableImages: false,
               disableLinks: false,
               disableSymbol: false,
 
@@ -358,9 +355,9 @@ export class TopNavMenuComponent implements OnInit {
           }else{
             this.rxCoreService.resetGuiConfig();
           }
-  
 
-          
+
+
         }
       }
 
@@ -391,7 +388,7 @@ export class TopNavMenuComponent implements OnInit {
 
   }
 
-  
+
 
   fileInfoDialog(): void {
     this.burgerOpened = false;
@@ -442,7 +439,7 @@ export class TopNavMenuComponent implements OnInit {
   onPDFDownloadClick():void{
     if (this.state?.activefile) {
       this.burgerOpened = false;
-      
+
       RXCore.downloadPDF();
 
       //RXCore.exportPDF();
@@ -465,7 +462,7 @@ export class TopNavMenuComponent implements OnInit {
 
 
   onActionSelect(actionType: ActionType): void {
-    
+
     if(this.actionType.includes(actionType)) {
       this.isActionSelected = !this.isActionSelected
     } else {
@@ -485,13 +482,13 @@ export class TopNavMenuComponent implements OnInit {
       this.annotationToolsService.setSearchPanelState({ visible: this.isActionSelected && actionType === "Search" });
     }
 
-    
-    
+
+
 
     setTimeout(() => {
-      //RXCore.doResize(false, 0, 0);      
+      //RXCore.doResize(false, 0, 0);
     }, 100);
-    
+
   }
 
 
@@ -514,9 +511,9 @@ export class TopNavMenuComponent implements OnInit {
 
 
     setTimeout(() => {
-      //RXCore.doResize(false, 0, 0);      
+      //RXCore.doResize(false, 0, 0);
     }, 100);
-    
+
   } */
 
 
@@ -635,7 +632,7 @@ export class TopNavMenuComponent implements OnInit {
 
   }
 
-  
+
   ngOnDestroy(): void {
     this.guiOnNoteSelected.unsubscribe();
   }

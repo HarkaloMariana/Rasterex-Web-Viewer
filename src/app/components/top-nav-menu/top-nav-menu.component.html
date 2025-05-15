@@ -1,12 +1,12 @@
 <nav class="top-nav-menu">
   <img
-    *ngIf="(guiConfig$ | async).logoUrl"
+    *ngIf="guiConfig.logoUrl"
     class="top-nav-item logo"
     alt="Rasterex Logo"
-    [src]="(guiConfig$ | async).logoUrl"
+    [src]="guiConfig.logoUrl"
   />
 
-  <div *ngIf="(guiConfig$ | async).canLogin" class="top-nav-item user-info">
+  <div *ngIf="guiConfig.canLogin" class="top-nav-item user-info">
     <rx-login></rx-login>
   </div>
 
@@ -60,7 +60,7 @@
       <div class="options-wrapper" style="right: unset; left: -32px">
         <ul class="options" role="listbox" aria-expanded="false">
           <li
-            *ngIf="!(guiConfig$ | async).disableViewPages"
+            *ngIf="!guiConfig.disableViewPages"
             role="option"
             tabindex="0"
             (click)="handleSidebarOpen(0)"
@@ -114,9 +114,9 @@
           </li>
           <li
             *ngIf="
-              (guiConfig$ | async).canSignature &&
+              guiConfig.canSignature &&
               canChangeSign &&
-              (guiMode$ | async) == GuiMode.Signature
+              guiMode == GuiMode.Signature
             "
             role="option"
             tabindex="0"
@@ -170,8 +170,8 @@
           </li>
           <li
             *ngIf="
-              !(guiConfig$ | async).disableViewVectorLayers &&
-              ((guiState$ | async).is2D || (guiState$ | async).isPDF) &&
+              !guiConfig.disableViewVectorLayers &&
+              (guiState.is2D || guiState.isPDF) &&
               containLayers
             "
             role="option"
@@ -196,8 +196,8 @@
           </li>
           <li
             *ngIf="
-              !(guiConfig$ | async).disableViewVectorLayers &&
-              (guiState$ | async).is2D &&
+              !guiConfig.disableViewVectorLayers &&
+              guiState.is2D &&
               containBlocks
             "
             role="option"
@@ -221,8 +221,8 @@
           </li>
           <li
             *ngIf="
-              !(guiConfig$ | async).disableView3DParts &&
-              (guiState$ | async).is3D
+              !guiConfig.disableView3DParts &&
+              guiState.is3D
             "
             role="option"
             tabindex="0"
@@ -248,7 +248,7 @@
       </div>
     </div>
   </div>
-  <div class="top-nav-item button burger" #burger>
+  <div class="top-nav-item button burger" *ngIf="fileLength > 0" #burger>
     <div
       class="dropdown"
       [class.opened]="burgerOpened"
@@ -279,7 +279,7 @@
       <div class="options-wrapper" style="right: unset; left: -32px">
         <ul class="options" role="listbox" aria-expanded="false">
           <li
-            *ngIf="(guiConfig$ | async).canFileOpen"
+            *ngIf="guiConfig.canFileOpen"
             role="option"
             tabindex="0"
             (click)="handleOpenFile()"
@@ -299,7 +299,7 @@
             <span>Open</span>
           </li>
           <li
-            *ngIf="(guiConfig$ | async).canSaveFile"
+            *ngIf="guiConfig.canSaveFile"
             role="option"
             tabindex="0"
             (click)="handleSaveFile()"
@@ -318,7 +318,7 @@
             </svg>
             <span>Save</span>
           </li>
-          <!-- <li *ngIf="(guiConfig$ | async).canSaveFile" role="option" tabindex="0" (click)="handleGetJSONMarkup()">
+          <!-- <li *ngIf="guiConfig.canSaveFile" role="option" tabindex="0" (click)="handleGetJSONMarkup()">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.1339 2H3.875C2.84113 2 2 2.84113 2 3.875V16.125C2 17.1589 2.84113 18 3.875 18H16.125C17.1589 18 18 17.1589 18 16.125V4.86613L15.1339 2ZM6.90625 3.25H10.625V5.625H11.875V3.25H13.125V6.25C13.125 6.59462 12.8446 6.875 12.5 6.875H7.53125C7.18663 6.875 6.90625 6.59462 6.90625 6.25V3.25ZM14.375 16.75H5.65625V11.25C5.65625 10.9054 5.93663 10.625 6.28125 10.625H13.75C14.0946 10.625 14.375 10.9054 14.375 11.25V16.75ZM16.75 16.125C16.75 16.4696 16.4696 16.75 16.125 16.75H15.625V11.25C15.625 10.2161 14.7839 9.375 13.75 9.375H6.28125C5.24738 9.375 4.40625 10.2161 4.40625 11.25V16.75H3.875C3.53038 16.75 3.25 16.4696 3.25 16.125V3.875C3.25 3.53038 3.53038 3.25 3.875 3.25H5.65625V6.25C5.65625 7.28387 6.49738 8.125 7.53125 8.125H12.5C13.5339 8.125 14.375 7.28387 14.375 6.25V3.25H14.6161L16.75 5.38387V16.125Z" fill="#333C4E"/>
                         </svg>
@@ -326,7 +326,7 @@
                     </li> -->
 
           <li
-            *ngIf="(guiConfig$ | async).canExport"
+            *ngIf="guiConfig.canExport"
             (click)="onExportClick()"
             role="option"
             tabindex="0"
@@ -351,7 +351,7 @@
           </li>
 
           <li
-            *ngIf="(guiConfig$ | async).canExport && isPDF"
+            *ngIf="guiConfig.canExport && isPDF"
             (click)="onPDFDownloadClick()"
             role="option"
             tabindex="0"
@@ -391,7 +391,7 @@
           </li>
 
           <li
-            *ngIf="(guiConfig$ | async).canExport && isPDF"
+            *ngIf="guiConfig.canExport && isPDF"
             (click)="onPDFUploadClick()"
             role="option"
             tabindex="0"
@@ -427,7 +427,7 @@
           </li>
 
           <li
-            *ngIf="(guiConfig$ | async).canPrint"
+            *ngIf="guiConfig.canPrint"
             role="option"
             tabindex="0"
             (click)="openModalPrint()"
@@ -502,8 +502,8 @@
           </li>
           <li
             *ngIf="
-              (guiConfig$ | async).canCompare &&
-              !(guiConfig$ | async).disableBurgerMenuCompare
+              guiConfig.canCompare &&
+              !guiConfig.disableBurgerMenuCompare
             "
             role="option"
             tabindex="0"
@@ -553,7 +553,7 @@
             </div>
             <span class="compare-text">Compare</span>
           </li>
-          <ng-container *ngIf="(guiConfig$ | async).canGetFileInfo">
+          <ng-container *ngIf="guiConfig.canGetFileInfo">
             <li class="separator"></li>
             <li role="option" tabindex="0" (click)="fileInfoDialog()">
               <svg
@@ -605,7 +605,7 @@
   </div>
 
   <div
-    *ngIf="(guiConfig$ | async).watermarkdemo"
+    *ngIf="guiConfig.watermarkdemo"
     class="top-nav-item watermark"
   >
     <button (click)="onWatermarkClick()">Add Watermark</button>
@@ -671,7 +671,7 @@
     <!-- <span class="tooltip-text tooltip-bottom">Comments</span> -->
   </div>
   <div
-    *ngIf="(guiConfig$ | async).canCollaborate && fileLength > 0"
+    *ngIf="guiConfig.canCollaborate && fileLength > 0"
     [ngClass]="{ selected: collabPanelOpened }"
     class="tooltip collab-icon"
     (click)="onCollabPanelSelect()"
