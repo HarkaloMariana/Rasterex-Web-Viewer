@@ -1,21 +1,52 @@
-<div class="tabs">
-    <ng-container *ngFor="let file of openedFiles">
+<div class="files">
+    <div class="dropdown-wrapper button sidebar" *ngIf="openedFiles.length">
         <div
-            *ngIf="file.index !== activeFile?.index || file.comparison || openedFiles.length < 2 || (guiState$ | async).is3D; else draggableTab"
-            class="tab-wrapper"
-            [class.droppable-zone]="file.index !== activeFile?.index && file.index == droppableIndex">
-                <ng-container *ngTemplateOutlet="tab; context: {file : file}"></ng-container>
+            class="dropdown"
+            (click)="sidebarOpened = !sidebarOpened"
+        >
+            <span class="dropdown-label">{{ activeFile?.name }}</span>
+            <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                [ngStyle]="{
+                    transform: sidebarOpened ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.3s ease'
+              }"
+            >
+                <path d="M6 8L10 12" stroke="#A4ABAE" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14 8L10 12" stroke="#A4ABAE" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
-        <ng-template #draggableTab>
-            <div class="tab-wrapper tooltip"
-                [draggableFileTab]="file.index == activeFile?.index"
-                (onDroppableZone)="onDroppableZone($event)"
-                (onDrop)="onDrop()">
-                    <ng-container *ngTemplateOutlet="tab; context: {file : file}"></ng-container>
-                    <span *ngIf="droppableIndex != undefined" class="tooltip-text tooltip-bottom">Drop to start comparing these documents.</span>
+
+        <div [class.opened]="sidebarOpened" class="options-container">
+            <div class="options-wrapper">
+                <ul class="options tabs" role="listbox" aria-expanded="false">
+                    <ng-container *ngFor="let file of openedFiles">
+                        <li *ngIf="file.index !== activeFile?.index || file.comparison || openedFiles.length < 2 || (guiState$ | async).is3D; else draggableTab"
+                            class="option-wrapper"
+                            [class.droppable-zone]="file.index !== activeFile?.index && file.index == droppableIndex">
+
+                            <ng-container *ngTemplateOutlet="tab; context: { file: file }"></ng-container>
+                        </li>
+                        <ng-template #draggableTab>
+                            <li class="option-wrapper tooltip"
+                                [draggableFileTab]="file.index == activeFile?.index"
+                                (onDroppableZone)="onDroppableZone($event)"
+                                (onDrop)="onDrop()">
+                                    <ng-container *ngTemplateOutlet="tab; context: { file: file }"></ng-container>
+                                    <span *ngIf="droppableIndex != undefined" class="tooltip-text tooltip-bottom">
+                                        Drop to start comparing these documents.
+                                    </span>
+                            </li>
+                        </ng-template>
+                    </ng-container>
+                </ul>
             </div>
-        </ng-template>
-    </ng-container>
+        </div>
+    </div>
 </div>
 
 <ng-template #tab let-file="file">

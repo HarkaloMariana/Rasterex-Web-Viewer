@@ -17,6 +17,8 @@ May 20, 2025
 
 ### 8. Added Fills to Create Custom Stamp Modal so that It can be 3sections and added edit button to enable edit of custom stamp(Need to dig into more for IndexDB)
 
+### 9. Display open file tabs in dropdown list
+
 Updated and new files
 
 RxCore version is now 35.921.
@@ -54,8 +56,9 @@ src/app/components/annotation-tools/stamp-panel/stamp-panel.component.html
 src/app/components/annotation-tools/stamp-panel/stamp-panel.component.ts
 src/assets/images/edit-ico.svg
 
-
-
+src\app\components\top-nav-menu\opened-files-tabs.component.html
+src\app\components\top-nav-menu\opened-files-tabs.component.scss
+src\app\components\top-nav-menu\opened-files-tabs.component.ts
 
 May 16, 2025
 
