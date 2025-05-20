@@ -18,6 +18,7 @@ May 20, 2025
 ### 8. Added Fills to Create Custom Stamp Modal so that It can be 3sections and added edit button to enable edit of custom stamp(Need to dig into more for IndexDB)
 
 ### 9. Display open file tabs in dropdown list
+### 10. Correctly update checkString after page toggle in multiSelect mode
 
 Updated and new files
 
@@ -59,6 +60,7 @@ src/assets/images/edit-ico.svg
 src\app\components\top-nav-menu\opened-files-tabs.component.html
 src\app\components\top-nav-menu\opened-files-tabs.component.scss
 src\app\components\top-nav-menu\opened-files-tabs.component.ts
+src\app\components\side-nav-menu\pages\pages.component.ts
 
 May 16, 2025
 
