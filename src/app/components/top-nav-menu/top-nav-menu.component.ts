@@ -8,7 +8,7 @@ import { IGuiConfig } from 'src/rxcore/models/IGuiConfig';
 import { CompareService } from '../compare/compare.service';
 import { TopNavMenuService } from './top-nav-menu.service';
 import { GuiMode } from 'src/rxcore/enums/GuiMode';
-import { Subscription } from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import { SideNavMenuService } from '../side-nav-menu/side-nav-menu.service';
 import { MeasurePanelService } from '../annotation-tools/measure-panel/measure-panel.service';
 import { ActionType } from './type';
@@ -59,7 +59,7 @@ export class TopNavMenuComponent implements OnInit {
   fileLength: number = 0;
   collabPanelOpened: boolean = false;
   private sidebarPanelActive: boolean = false;
-  
+
   constructor(
     private readonly fileGaleryService: FileGaleryService,
     private readonly rxCoreService: RxCoreService,
@@ -91,6 +91,7 @@ export class TopNavMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.handleIconRotation();
     this._setOptions();
 
     this.rxCoreService.guiState$.subscribe((state) => {
@@ -141,7 +142,7 @@ export class TopNavMenuComponent implements OnInit {
       if (value !== undefined){
         this.isActionSelected = value;
       }
-     
+
     });
 
     this.annotationToolsService.notePanelState$.subscribe(state => {
@@ -153,7 +154,7 @@ export class TopNavMenuComponent implements OnInit {
       if(state.visible && state.value) {
         this.currentScaleValue = state.value;
       }
-      
+
       if(state.visible === false) {
         this.currentScaleValue = '';
       }
@@ -198,6 +199,12 @@ export class TopNavMenuComponent implements OnInit {
     if ($event.code === 'Escape') {
       this.moreOpened = this.burgerOpened = this.sidebarOpened = false;
     }
+  }
+
+  handleIconRotation(): void {
+    this.service.closeSideNav$.subscribe((value) => {
+      this.sidebarPanelActive = value;
+    })
   }
 
   handlePrint(event: KeyboardEvent) {
@@ -330,14 +337,14 @@ export class TopNavMenuComponent implements OnInit {
 
             if(RXCore.getDocScales() != undefined && RXCore.getDocScales().length === 0 ){
               //this.scalesOptions = RXCore.getDocScales();
-              this.annotationToolsService.setMeasurePanelState({ visible: true }); 
+              this.annotationToolsService.setMeasurePanelState({ visible: true });
             }
-        
 
-            /*if(docObj && docObj.scalesOptions && docObj.scalesOptions.length === 0) 
+
+            /*if(docObj && docObj.scalesOptions && docObj.scalesOptions.length === 0)
               this.annotationToolsService.setMeasurePanelState({ visible: true }); */
-            
-  
+
+
           } else if(option.value === 'annotate'){
             this.rxCoreService.setGuiConfig({
               disableMarkupTextButton: false,
@@ -354,7 +361,7 @@ export class TopNavMenuComponent implements OnInit {
               disableMarkupArrowButton: false,
               disableMarkupCountButton: true,
               disableMarkupMeasureButton: true,
-              disableImages: false, 
+              disableImages: false,
               disableLinks: false,
               disableSymbol: false,
 
@@ -363,9 +370,9 @@ export class TopNavMenuComponent implements OnInit {
           }else{
             this.rxCoreService.resetGuiConfig();
           }
-  
 
-          
+
+
         }
       }
 
@@ -396,7 +403,7 @@ export class TopNavMenuComponent implements OnInit {
 
   }
 
-  
+
 
   fileInfoDialog(): void {
     this.burgerOpened = false;
@@ -447,7 +454,7 @@ export class TopNavMenuComponent implements OnInit {
   onPDFDownloadClick():void{
     if (this.state?.activefile) {
       this.burgerOpened = false;
-      
+
       RXCore.downloadPDF();
 
       //RXCore.exportPDF();
@@ -470,7 +477,7 @@ export class TopNavMenuComponent implements OnInit {
 
 
   onActionSelect(actionType: ActionType): void {
-    
+
     if(this.actionType.includes(actionType)) {
       this.isActionSelected = !this.isActionSelected
     } else {
@@ -490,13 +497,13 @@ export class TopNavMenuComponent implements OnInit {
       this.annotationToolsService.setSearchPanelState({ visible: this.isActionSelected && actionType === "Search" });
     }
 
-    
-    
+
+
 
     setTimeout(() => {
-      //RXCore.doResize(false, 0, 0);      
+      //RXCore.doResize(false, 0, 0);
     }, 100);
-    
+
   }
 
 
@@ -519,9 +526,9 @@ export class TopNavMenuComponent implements OnInit {
 
 
     setTimeout(() => {
-      //RXCore.doResize(false, 0, 0);      
+      //RXCore.doResize(false, 0, 0);
     }, 100);
-    
+
   } */
 
 
@@ -640,7 +647,7 @@ export class TopNavMenuComponent implements OnInit {
 
   }
 
-  
+
   ngOnDestroy(): void {
     this.guiOnNoteSelected.unsubscribe();
   }

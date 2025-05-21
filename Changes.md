@@ -1,3 +1,18 @@
+May 21, 2025
+
+
+### 1. fixed issue with paginator, added possibility to rotate icon on top-nav-menu when closed from side-nav-menu, reset selected pages when switch from multiselect to single
+
+Updated and new files
+
+/src/app/components/bottom-toolbar.html
+/src/app/components/bottom-toolbar.scss
+/src/app/components/side-nav-menu/pages.ts
+/src/app/components/side-nav-menu.ts
+/src/app/components/top-nav-menu.html
+/src/app/components/top-nav-menu.ts
+/src/app/components/top-nav-menu.service.ts
+
 May 20, 2025
 
 
