@@ -102,6 +102,7 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
 //import { NumericRangeDirective } from "./components/side-nav-menu/pages/numeric-range.directive";
 import { NumericRangeDirective } from "./directives/numeric-range.directive";
 import { ResizableDirective } from './directives/resizable.directive';
+import {IsPinnedPipe} from "./components/top-nav-menu/opened-files-tabs/is-pinned.pipe";
 
 const storeSchema = [
   { name: 'name', keypath: 'name', options: { unique: false } },
@@ -113,11 +114,11 @@ const dbConfig: DBConfig  = {
   objectStoresMeta: [
     { store: 'CustomStamp',
       storeConfig: { keyPath: 'id', autoIncrement: true },
-      storeSchema 
+      storeSchema
     },
     { store: 'UploadStamp',
       storeConfig: { keyPath: 'id', autoIncrement: true },
-      storeSchema 
+      storeSchema
     }
   ]
 };
@@ -200,6 +201,7 @@ const dbConfig: DBConfig  = {
     HighlightPipe,
     SizeModalComponent,
     SafeHtmlPipe,
+    IsPinnedPipe,
     CommentStatusIconComponent,
     LoginComponent,
     RoomPanelComponent,
@@ -222,6 +224,6 @@ const dbConfig: DBConfig  = {
   ],
   providers: [ColorHelper, Title],
   bootstrap: [AppComponent],
-  
+
 })
 export class AppModule { }

@@ -19,6 +19,7 @@ May 20, 2025
 
 ### 9. Display open file tabs in dropdown list
 ### 10. Correctly update checkString after page toggle in multiSelect mode
+### 11. Add pinned files section next to dropdown list
 
 Updated and new files
 

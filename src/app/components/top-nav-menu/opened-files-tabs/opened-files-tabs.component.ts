@@ -203,7 +203,7 @@ export class OpenedFilesTabsComponent implements OnInit {
     event.stopPropagation();
 
     console.log("closing tab");
-
+    this.pinFiles(file);
     if (file.comparison && RXCore.markupChanged) {
       this.compareService.onUnsavedChanges.next();
     } else {
@@ -219,6 +219,15 @@ export class OpenedFilesTabsComponent implements OnInit {
       // this._closeTab(file);
 
     }
+  }
+
+  pinFiles(file): void {
+    this.toggleItem(this.pinnedFiles, file);
+  }
+
+  toggleItem(arr, newItem): void {
+    const index = arr.findIndex(index => index.id === newItem.id);
+    index > -1 ? arr.splice(index, 1) : arr.push(newItem);
   }
 
   handleSelectTab(file): void {
