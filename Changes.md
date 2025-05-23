@@ -1,3 +1,13 @@
+May 23, 2025 
+
+### 1. Resolve issue with close and pin actions causing duplicate pinned tabs
+
+Updated and new files
+
+src\app\components\top-nav-menu\opened-files-tabs\opened-files-tabs.component.scss
+src\app\components\top-nav-menu\opened-files-tabs\opened-files-tabs.component.ts
+
+
 May 22, 2025
 
 ### 1. Added insert and delete point functionality for all multi-point annotations (polyline, polygon, counter, and measurement path)

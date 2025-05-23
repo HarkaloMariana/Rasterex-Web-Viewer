@@ -24,7 +24,7 @@ declare var hideAllIframes;
 })
 export class OpenedFilesTabsComponent implements OnInit {
   guiState$ = this.rxCoreService.guiState$;
-  
+
   guiConfig$ = this.rxCoreService.guiConfig$;
   guiConfig: IGuiConfig | undefined;
 
@@ -66,20 +66,20 @@ export class OpenedFilesTabsComponent implements OnInit {
   }
 
   private _closeTabWithSaveConfirmModal(file): void {
-    
+
     console.log("closing tab handling");
-    
+
     if (!file) return;
     //const doc = RXCore.printDoc();
 
     if(RXCore.markupChanged) {
 
       //*ngIf="(guiState$ | async).is3D;"
-      //*ngIf="!(guiConfig$ | async).disableMarkupCalloutButton 
+      //*ngIf="!(guiConfig$ | async).disableMarkupCalloutButton
 
       this.closeDocumentModal = true;
-      
-      
+
+
     }
 
     if(!this.closeDocumentModal) {
@@ -96,7 +96,7 @@ export class OpenedFilesTabsComponent implements OnInit {
       this.compareService.deleteComparison(file.comparison);
     }
 
-    //RXCore.markupSaveCheck(false);    
+    //RXCore.markupSaveCheck(false);
     RXCore.closeDocument();
     RXCore.markupSaveCheck(true);
 
@@ -205,7 +205,10 @@ export class OpenedFilesTabsComponent implements OnInit {
     event.stopPropagation();
 
     console.log("closing tab");
-    this.pinFiles(file);
+    const index = this.pinnedFiles.findIndex(item => item.id === file.id);
+    if (index > -1) {
+      this.pinnedFiles.splice(index, 1); // remove the item
+    }
 
     if (file.comparison && RXCore.markupChanged) {
       this.compareService.onUnsavedChanges.next();
@@ -220,7 +223,7 @@ export class OpenedFilesTabsComponent implements OnInit {
 
 
       // this._closeTab(file);
-      
+
     }
   }
 
